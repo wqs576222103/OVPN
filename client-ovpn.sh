@@ -1,5 +1,6 @@
 # 进入easy-rsa目录
-cd /home/openvpn/openvpn-ca
+# cd /home/openvpn/openvpn-ca
+cd /tmp/easy-rsa/easyrsa3
 
 # 快速创建客户端配置
 read -p "输入客户端名称: " CLIENT
@@ -16,7 +17,7 @@ client
 # 使用 TUN 设备，创建一个基于 IP 的虚拟网络接口。
 dev tun
 proto udp
-remote 129.28.44.109 1194
+remote 43.134.40.35 1194
 # 如果连接失败，无限次重试解析服务器地址。
 resolv-retry infinite
 # 客户端不会绑定到本地端口，这允许客户端在不同的网络接口上连接到服务器。
@@ -51,6 +52,6 @@ $(cat pki/issued/${CLIENT}.crt)
 $(cat pki/private/${CLIENT}.key)
 </key>
 <tls-auth>
-$(cat ta.key)
+$(cat pki/tls-auth.key)
 </tls-auth>
 EOF
